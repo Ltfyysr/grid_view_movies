@@ -28,7 +28,6 @@ class _DetaySayfasiState extends State<DetaySayfasi> {
                       onPressed: () {
                         setState(() {
                           favoriteButton = false;
-
                         });
                         print("favorilere eklendi ");
                       },
@@ -37,19 +36,10 @@ class _DetaySayfasiState extends State<DetaySayfasi> {
                       onPressed: () {
                         setState(() {
                           favoriteButton = true;
-
                         });
                         print("favorilerden kaldırıldı");
-
                       },
-                      icon: Icon(Icons.favorite,color: Colors.red))
-
-              /* IconButton(onPressed: (){
-              setState((){
-                Icon(Icons.favorite,color: Colors.red);
-              });
-            },icon: Icon(Icons.favorite_border_outlined)),*/
-              ),
+                      icon: Icon(Icons.favorite, color: Colors.red))),
         ],
       ),
       body: Center(

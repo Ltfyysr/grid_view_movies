@@ -53,72 +53,81 @@ class _AnasayfaState extends State<Anasayfa> {
 
     return filmListesi;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Filmler"),actions: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: IconButton(onPressed: (){
-
-          },icon: Icon(Icons.person)),
+        appBar: AppBar(
+          title: const Text("Filmler"),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(onPressed: () {}, icon: Icon(Icons.person)),
+            ),
+          ],
         ),
-      ],),
-      body: FutureBuilder<List<Filmler>>(
-        future: filmleriGetir(),
-          builder: (context,snapshot){
-          if(snapshot.hasData){
-            var filmListesi = snapshot.data;
-            return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2/3.5),
-                itemCount: filmListesi!.length,
-                itemBuilder: (context,index){
-                  var film = filmListesi[index];
-                  return GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> DetaySayfasi(film : film)));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset("resimler/${film.filmResimAd}"),
-                          Text(film.filmAd,style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-                          Text("${film.filmFiyat} ₺",style:  TextStyle(fontSize: 16,color: Colors.teal )),
-                        ],
-
-                      ),
-                      ),
-                    ),
-                  );
-                });
-          }else{
-            return Center();
-          }
-          }),
-      drawer: Drawer(
-          child: ListView(padding: EdgeInsets.zero,
+        body: FutureBuilder<List<Filmler>>(
+            future: filmleriGetir(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                var filmListesi = snapshot.data;
+                return GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 2 / 3.5),
+                    itemCount: filmListesi!.length,
+                    itemBuilder: (context, index) {
+                      var film = filmListesi[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetaySayfasi(film: film)));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset("resimler/${film.filmResimAd}"),
+                                Text(
+                                  film.filmAd,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text("${film.filmFiyat} ₺",
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.teal)),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    });
+              } else {
+                return const Center();
+              }
+            }),
+        drawer: Drawer(
+            child: ListView(padding: EdgeInsets.zero, children: [
+          DrawerHeader(
+            child:  Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                DrawerHeader(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Giriş Yap/Hesap Oluştur",
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
-                    ],
-                  ),
-                  decoration:  BoxDecoration(color: anaRenk),
+                Text(
+                  "Giriş Yap/Hesap Oluştur",
+                  style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
-              ]
-          )
-      )
-
-    );
+              ],
+            ),
+            decoration: BoxDecoration(color: anaRenk),
+          ),
+        ])));
   }
 }
